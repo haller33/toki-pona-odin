@@ -1,0 +1,12 @@
+
+* Toki Pona Odin
+
+
+** demos
+
+
+** motivation
+
+* version of [[https://github.com/odin-lang/odin][Odin]]
+
+dev-2023-11:ef5eb4b6

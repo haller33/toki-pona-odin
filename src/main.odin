@@ -4,8 +4,32 @@ import lib "../lib"
 import fmt "core:fmt"
 import os "core:os"
 
-FILE_TEST_NAME :: "./t/toki_pona_text_nasa.tkp"
+import lua "vendor:lua/5.1"
 
+
+main :: proc () {
+
+
+    lu : lua.State = lua.newstate()
+
+    ret : lua.Status = lua.L_loadfile(lu, "./t/test.lua")
+    if !(ret == lua.Status.OK) {
+        lua.L_error(ret, "Lua_loadfile Failed.")
+        exit("Error")
+    }
+
+    fmt.println("is C, calling lua")
+
+    re = lua.pcall(lu, 0, 0, 0)
+    if !(ret == lua.Status.OK) {
+        lua.L_error(ret, "lua pcall() failed")
+        exit("error")
+    }
+
+    lua.close(lua)
+
+    return
+}
 
 read_entire_file_from_path :: proc(file_path_name: string) -> (string, bool) {
 
@@ -22,8 +46,9 @@ read_entire_file_from_path :: proc(file_path_name: string) -> (string, bool) {
   return string(data_text_digest), ok
 }
 
-main :: proc() {
+main_test_input :: proc() {
 
+  FILE_TEST_NAME :: "./t/toki_pona_text_nasa.tkp"
   // fmt.println("Hello World")
 
   scand: lib.Scanner
